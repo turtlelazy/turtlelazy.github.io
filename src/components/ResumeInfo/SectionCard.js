@@ -24,6 +24,13 @@ const SectionCard = ({ title, date, description, link, skills, children }) => {
                         {rows}
                     </div>
             </div>
+
+            
+            {hover && (
+                <div className="pt-5">
+                    {children}
+                </div>
+            )}
         </div>
         </a>
     );

@@ -25,10 +25,10 @@ const WorkXP = () => {
                 date={"June 2022 - August 2024"} link={'https://menottienterprise.com/'} skills={MenottiSkills}>
             </SectionCard>
 
-            <SectionCard title="Undergraduate Research @Hunter CV Lab"
+            {/* <SectionCard title="Undergraduate Research @Hunter CV Lab"
                 description="Studied and experimented with Neural Radiance Fields, using the method to synthesize novel viewpoints of target scenes from a limited scene photoset (ex. bannana and cat models)."
                 date={"January 2024 - May 2024"} skills={CVLabSkills}>
-            </SectionCard>
+            </SectionCard> */}
         </Section>    
     );
 }

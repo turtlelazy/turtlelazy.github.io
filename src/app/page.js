@@ -24,7 +24,7 @@ export default function Home() {
   const projectsRef = useRef(null);
   const education = useRef(null);
 
-  const [highlight, setHighlight] = useState("workxp");
+  const [highlight, setHighlight] = useState("education");
 
   const [renderedEl, setRenderedEl] = useState({
     "aboutCard" : true,
@@ -53,7 +53,11 @@ export default function Home() {
     console.log('projects', projectsRef.current.getBoundingClientRect().top, projectsRef.current.getBoundingClientRect().bottom);
     console.log('position', position);
 
-    if (workxpRef.current.getBoundingClientRect().bottom >= 0){
+    if (education.current.getBoundingClientRect().bottom >= 0) {
+      console.log('education');
+      setHighlight("education");
+    }
+    else if (workxpRef.current.getBoundingClientRect().bottom >= 0){
       console.log('workxp');
       setHighlight("workxp");
     }
@@ -61,10 +65,7 @@ export default function Home() {
       console.log('projects');
       setHighlight("projects");
     }
-    else if (education.current.getBoundingClientRect().bottom >= 0) {
-      console.log('education');
-      setHighlight("education");
-    }
+
 
     setScrollPosition(position);
   };
@@ -83,24 +84,25 @@ export default function Home() {
 
       {/* <Banner /> */}
       <div className="flex flex-col md:flex-row p-4 relative" ref={aboutCard}>
-        <div className="w-full md:w-[50%] md:fixed">
+        <div className="w-full md:w-[45%] md:fixed">
           <InputOutput rendered={renderedEl["aboutCard"]} inputText={"whoami"}>
-            <p style={{ fontSize: '5vw' }}>ishraq_mahid</p>
+            <p className="text-4xl md:text-6xl pb-4">ishraq_mahid</p>
           </InputOutput>
           
           <InputOutput rendered={renderedEl["aboutCard"]} inputText={"cat about_me.txt"} typingSpeed={225}>
             <p style={{ fontSize: "14px" }}>
-              Hey, I&apos;m Ish! I&apos;m a rising junior at Hunter College currently double majoring in computer science and mathematics. I first started coding in high school after joining my robotics team. Ever since then, I&apos;ve been exploring what I love by attending hackathons, working as a software dev, and doing undergraduate research.
+              Hey, I&apos;m Ishraq Mahid! I&apos;m a rising junior at Hunter College currently double majoring in computer science and mathematics. I first started coding in high school after joining my robotics team. Ever since then, I&apos;ve been exploring what I love by attending hackathons, working as a software dev, and doing undergraduate research.
               <br></br><br></br>
               Now, I enjoy creating everything from robots and cool mobile apps, to machine-learning models, alongside exploring technical and complex mathematics. In my spare time, I enjoy working out, sewing, playing the piano, and baking.
             </p>
           </InputOutput>
-          <div className="pt-5 pb-5">
+          <div className="hidden md:block md:pt-3 md:pb-3">
             <InputOutput rendered={true} inputText={"ls /home"}>
               <div className='flex flex-col'>
+                <Link> <span style={{ color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "education") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { education.current.scrollIntoView() }}>education_and_extracurriculars</span></Link>
                 <Link> <span style={{ color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "workxp") ? { backgroundColor: '#00FF00' } : {}  }} onClick={() => { workxpRef.current.scrollIntoView() }}>work_experience</span></Link>
-                <Link href="/"> <span style={{ color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "projects") ? { backgroundColor: '#00FF00' } : {} }}>projects</span></Link>
-                <Link> <span style={{ color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "education") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { workxpRef.current.scrollIntoView() }}>education_and_extracurriculars</span></Link>
+                <Link> <span style={{ color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "projects") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { projectsRef.current.scrollIntoView() }}>projects</span></   Link>
+
               </div>
             </InputOutput>
           </div>
@@ -117,7 +119,10 @@ export default function Home() {
         {/** Right side of the wall */}
         <div className="w-full md:pl-[50%]">
 
-          <InputOutput rendered={renderedEl["aboutCard"]} inputText={"cd experiences/ && cat work.txt && cat projects.txt"}>
+          <InputOutput rendered={renderedEl["aboutCard"]} inputText={"cat education_and_extracurriculares/info.txt && cat work_experience/info.txt && cat projects/info.txt"} typingSpeed={70  }>
+            <div ref={education}>
+              <Education />
+            </div>
             <div ref={workxpRef}  id="workxp">
               <WorkXP />
             </div>
@@ -125,9 +130,7 @@ export default function Home() {
               <Projects />
             </div>
 
-            <div ref={education}>
-              <Education />
-            </div>
+
           </InputOutput>
           
 

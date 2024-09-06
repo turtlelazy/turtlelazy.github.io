@@ -3,6 +3,7 @@ import Section from '../SectionTemplate';
 import SectionCard from '../SectionCard';
 import { listStyles } from '../SectionCard';
 import BubbleWrapper from '@/components/AsciiLogos/BubbleWrapper';
+import Image from 'next/image';
 
 
 const Projects = () => {
@@ -10,11 +11,16 @@ const Projects = () => {
     const InfoInsight = ['Flask', 'beautifulsoup4', 'HTML/CSS', 'JavaScript'];
     const SheetMusicScanner = ['Flask', 'OpenCV', 'MongoDB', 'HTML/CSS', 'JavaScript'];
     const BadApple = ['Computer Architecture', 'Logic Simulator', 'Compiler Design', 'ffmpeg'];
-    const SDEs = ['Python', 'Stochastic Calculus', 'numpy', 'pandas', 'matplotlib', 'scipy', 'MATLAB'];
+    const Choropleth = ['R', 'ACS API', 'shapefile', 'ggplot2', 'gganimate'];
     return (
         <Section header="Projects">
-            <SectionCard title="Stochastic Differential Equations @CUNY DRP 2024" description="Studied Stochastic Differential Equations under the guidance of a PhD mentor, creating Python simulations of SDEs to analyze their behavior and presenting the topic"
-                date={"January 2024 - May 2024"} link={'https://sites.google.com/view/cunydrp/past-semesters/2024'} skills={SDEs}>
+
+            <SectionCard title="ACS PUMA Choropleth" description="Personal project, generating animated choropleth maps of all 50 U.S. states. Wrote util R wrapper files for the ACS API and shapefile plots, to generate choropleth based on a chosen metric."
+                date={"September 2024"} link={'https://github.com/turtlelazy/acs-puma-choropleths'} skills={Choropleth}>
+                    <div className='flex flex-wrap'>
+                        <Image src='/NY_PUMA_Income_Map_Animation.gif' width={300} height={300} />
+                        <Image src='/CA_animated_map.gif' width={300} height={300} />
+                    </div>
             </SectionCard>
 
             <SectionCard title="PillPall @SBU Hacks Spring 2024" description="Assemble a mobile health app using the MERN stack to provide users with tailored information regarding medication, dosage, and frequency based on user medical info and history. Won hackathon award for best use of Google Cloud API" 
