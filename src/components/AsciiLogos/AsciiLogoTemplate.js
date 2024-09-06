@@ -13,7 +13,6 @@ const AsciiLogoTemp = ({...props}) => {
         const doc = parser.parseFromString(htmlContent, 'text/html');
         const childrenArray = Array.from(doc.body.children);
         setChildrenList(childrenArray);
-        console.log("chyildren", childrenArray);
     }, [htmlContent]);
 
     useEffect(() => {

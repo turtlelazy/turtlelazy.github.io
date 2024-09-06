@@ -5,13 +5,13 @@ import { listStyles } from '../SectionCard';
 import BubbleWrapper from '@/components/AsciiLogos/BubbleWrapper';
 
 
-const WorkXP = () => {
+const Education = () => {
     const ERBuddySkills = ['React Native', 'Express.js', 'PostgreSQL', 'AWS', 'Tesseract.js'];
     const AuristorSkills = ['React', 'Kerberos', 'AFS', 'Nginx', 'Docker', 'Kubernetes'];
     const MenottiSkills = ['Flask', 'DigitalOcean', 'SQLite', 'Quickbooks', 'pandas', 'numpy'];
     const CVLabSkills = ['Python', 'PyTorch', 'NeRF', 'OpenCV','Docker'];
     return (
-        <Section header="Work Experience">
+        <Section header="Education and Extracurriculars">
             <SectionCard title="Fullstack Developer @ErBuddy" description="Developed React Native health app to help users and their caretakers manage medication, measurements, and health files, and utilize the ERBuddy Smart Pillbox " date={"June 2024 - August 2024"} link={'https://myerbuddy.com/'} skills={ERBuddySkills}>
             </SectionCard>
 
@@ -33,4 +33,4 @@ const WorkXP = () => {
     );
 }
 
-export default WorkXP;
+export default Education;

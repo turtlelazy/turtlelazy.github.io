@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Mp4FrameViewer from './FrameViewer';
+import InputOutput from '../TerminalAesthetic/InputOutput';
+import Link from '../Link';
 
 const Opening = () => {
 
@@ -22,7 +24,8 @@ const Opening = () => {
     return (
         <div style={{ width: '100%', fontFamily: 'monospace' }}>
             <div style={{ width: '100%' }} className='flex-auto p-0'>
-                <p style={{ textAlign: 'center', fontSize: '5vw' }}>./Hello\ World\!/ish.out</p>
+                <p style={{ textAlign: 'center', fontSize: '5vw' }}>ishraq_mahid</p>
+
             </div>
             {/* <div style={{ width: '100%' }}
                 ref={el => {

@@ -10,10 +10,10 @@ const SectionCard = ({ title, date, description, link, skills, children }) => {
         );
     }) : null;
     
-    console.log("hov",hover);
+    // console.log("hov",hover);
     return (
         <a href={link} style={{ cursor: 'url(cursor-open.png),auto' }} target="_blank">
-        <div style={{ ...styles.card, ...hover ? { backgroundColor: "#343D46" } : { backgroundColor: "black" }}} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+        <div style={{ ...styles.card, ...hover ? { backgroundColor: "#343D46" } : { backgroundColor: "#1e1e1e" }}} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
             <div style={styles.header}>
                 <h2 style={styles.title}>{title}</h2>
                 {date && <p style={styles.date}>{date}</p>}
