@@ -17,12 +17,15 @@ import Head from "next/head";
 import Link from "@/components/Link";
 import { useIsVisible } from "@/components/IsVisible";
 import Education from "@/components/ResumeInfo/NamedSections/Education";
+import Artwork from "@/components/ResumeInfo/NamedSections/Artwork";
 export default function Home() {
 
   const aboutCard = useRef(null);
   const workxpRef = useRef(null);
   const projectsRef = useRef(null);
   const education = useRef(null);
+  const artworkRef = useRef(null);
+
 
   const [highlight, setHighlight] = useState("education");
 
@@ -30,52 +33,65 @@ export default function Home() {
     "aboutCard" : true,
   });
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [width, setWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 0);
 
-
-  const handleScroll = () => {
-    const position = window.scrollY;
-    console.log('scroll', position);
-    console.log('aboutcard', aboutCard.current.getBoundingClientRect().top);
-    // if(scrollPosition >= workxpRef.current.getBoundingClientRect().top){
-    //   console.log('workxpref', "inview")
-    // }
-    
-    if(aboutCard.current.getBoundingClientRect().top < 0){
-      console.log('aboutcardref', renderedEl["aboutCard"]);
-      setRenderedEl(
-        prevRenderedEl => ({
-          ...prevRenderedEl,
-          "aboutCard": true,
-        })
-      );
-    }
-    console.log('workxp', workxpRef.current.getBoundingClientRect().top, workxpRef.current.getBoundingClientRect().bottom);
-    console.log('projects', projectsRef.current.getBoundingClientRect().top, projectsRef.current.getBoundingClientRect().bottom);
-    console.log('position', position);
-
-    if (education.current.getBoundingClientRect().bottom >= 0) {
-      console.log('education');
-      setHighlight("education");
-    }
-    else if (workxpRef.current.getBoundingClientRect().bottom >= 0){
-      console.log('workxp');
-      setHighlight("workxp");
-    }
-    else if (projectsRef.current.getBoundingClientRect().bottom >= 0) {
-      console.log('projects');
-      setHighlight("projects");
-    }
-
-
-    setScrollPosition(position);
-  };
-
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleWindowSizeChange);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+      window.removeEventListener('resize', handleWindowSizeChange);
+    }
   }, []);
+
+  const isMobile = width <= 768;
+
+
+  // const handleScroll = () => {
+  //   const position = window.scrollY;
+  //   console.log('scroll', position);
+  //   console.log('aboutcard', aboutCard.current.getBoundingClientRect().top);
+  //   // if(scrollPosition >= workxpRef.current.getBoundingClientRect().top){
+  //   //   console.log('workxpref', "inview")
+  //   // }
+    
+  //   if(aboutCard.current.getBoundingClientRect().top < 0){
+  //     console.log('aboutcardref', renderedEl["aboutCard"]);
+  //     setRenderedEl(
+  //       prevRenderedEl => ({
+  //         ...prevRenderedEl,
+  //         "aboutCard": true,
+  //       })
+  //     );
+  //   }
+  //   console.log('workxp', workxpRef.current.getBoundingClientRect().top, workxpRef.current.getBoundingClientRect().bottom);
+  //   console.log('projects', projectsRef.current.getBoundingClientRect().top, projectsRef.current.getBoundingClientRect().bottom);
+  //   console.log('position', position);
+
+  //   if (education.current.getBoundingClientRect().bottom >= 0) {
+  //     console.log('education');
+  //     setHighlight("education");
+  //   }
+  //   else if (workxpRef.current.getBoundingClientRect().bottom >= 0){
+  //     console.log('workxp');
+  //     setHighlight("workxp");
+  //   }
+  //   else if (projectsRef.current.getBoundingClientRect().bottom >= 0) {
+  //     console.log('projects');
+  //     setHighlight("projects");
+  //   }
+
+
+  //   setScrollPosition(position);
+  // };
+
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleScroll, { passive: true });
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
   return (
     <main style={{ cursor: 'url(cursor.png),auto', fontFamily:'monospace' }} className='p-0'>
       <Head>
@@ -99,9 +115,11 @@ export default function Home() {
           <div className="hidden md:block md:pt-3 md:pb-3">
             <InputOutput rendered={true} inputText={"ls /home"}>
               <div className='flex flex-col'>
-                <Link> <span style={{ color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "education") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { education.current.scrollIntoView() }}>education_and_extracurriculars</span></Link>
-                <Link> <span style={{ color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "workxp") ? { backgroundColor: '#00FF00' } : {}  }} onClick={() => { workxpRef.current.scrollIntoView() }}>work_experience</span></Link>
-                <Link> <span style={{ color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "projects") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { projectsRef.current.scrollIntoView() }}>projects</span></   Link>
+                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "education") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("education") }}>education_and_extracurriculars</span></Link>
+                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "workxp") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("workxp") }}>work_experience</span></Link>
+                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "projects") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("projects") }}>projects</span></   Link>
+                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "artwork") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("artwork") }}>artwork</span></   Link>
+
 
               </div>
             </InputOutput>
@@ -119,16 +137,31 @@ export default function Home() {
         {/** Right side of the wall */}
         <div className="w-full md:pl-[50%]">
 
-          <InputOutput rendered={renderedEl["aboutCard"]} inputText={"cat education_and_extracurriculares/info.txt && cat work_experience/info.txt && cat projects/info.txt"} typingSpeed={70  }>
-            <div ref={education}>
-              <Education />
-            </div>
+          <InputOutput rendered={renderedEl["aboutCard"]} inputText={`cat ${highlight}/info.txt`} typingSpeed={50}>
+            {(highlight == "education" || isMobile) &&
+              <div ref={education}>
+                <Education />
+              </div>
+          }
+            
+
+            {(highlight == "workxp" || isMobile) &&
             <div ref={workxpRef}  id="workxp">
               <WorkXP />
             </div>
+            }
+
+            {(highlight == "projects" || isMobile) &&
             <div ref={projectsRef}>
               <Projects />
             </div>
+          }
+
+            {(highlight == "artwork" || isMobile) &&
+              <div ref={artworkRef}>
+                <Artwork />
+              </div>
+            }
 
 
           </InputOutput>
