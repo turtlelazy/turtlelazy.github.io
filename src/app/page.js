@@ -107,7 +107,7 @@ export default function Home() {
           
           <InputOutput rendered={renderedEl["aboutCard"]} inputText={"cat about_me.txt"} typingSpeed={225}>
             <p style={{ fontSize: "14px" }}>
-              Hey, I&apos;m Ishraq Mahid! I&apos;m a rising junior at Hunter College currently double majoring in computer science and mathematics. I first started coding in high school after joining my robotics team. Ever since then, I&apos;ve been exploring what I love by attending hackathons, working as a software dev, and doing undergraduate research.
+              Hey, I&apos;m Ishraq Mahid! I&apos;m a junior at Hunter College currently double majoring in computer science and mathematics. I first started coding in high school after joining my robotics team. Ever since then, I&apos;ve been exploring what I love by attending hackathons, working as a software dev, and doing undergraduate research.
               <br></br><br></br>
               Now, I enjoy creating everything from robots and cool mobile apps, to machine-learning models, alongside exploring technical and complex mathematics. In my spare time, I enjoy working out, sewing, playing the piano, and baking.
             </p>
