@@ -31,6 +31,12 @@ const Projects = () => {
                     </div>
             </SectionCard>
 
+            <SectionCard title="Bad Apple @StuyHacks January 2022" description="Created a virtual computer to play videos on an LED array, designing a circuit in a logic simulator and writing a compiler to convert mp4 file to machine OPCode."
+                date={"January 2022"} link={'https://devpost.com/software/making-a-computer-to-play-bad-apple'} skills={BadApple}>
+                    <p style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>VOLUME WARNING FOR VIDEO</p><br></br>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/w_mW0DWru-A?si=hzlTI5saKrizxw1H" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+            </SectionCard>
+
             <SectionCard title="PillPall @SBU Hacks Spring 2024" description="Assemble a mobile health app using the MERN stack to provide users with tailored information regarding medication, dosage, and frequency based on user medical info and history. Won hackathon award for best use of Google Cloud API" 
                 date={"February 2024"} link={'https://devpost.com/software/pillpal-airu2d'} skills={PillPal}>
             </SectionCard>
@@ -41,10 +47,6 @@ const Projects = () => {
 
             <SectionCard title="Sheet Music Scanner @HackPrinceton Spring 2023" description="Provided a music sheet processing service for parsing MIDI data from user-input image files, serving dynamic website pages to track saved scores and provide audio playback."
                 date={"April 2023"} link={'https://devpost.com/software/sheet-music-scanner'} skills={SheetMusicScanner}>
-            </SectionCard>
-
-            <SectionCard title="Bad Apple @StuyHacks January 2022" description="Created a virtual computer to play videos on an LED array, designing a circuit in a logic simulator and writing a compiler to convert mp4 file to machine OPCode."
-                date={"January 2022"} link={'https://devpost.com/software/making-a-computer-to-play-bad-apple'} skills={BadApple}>
             </SectionCard>
 
         </Section>    
