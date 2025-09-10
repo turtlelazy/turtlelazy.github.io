@@ -115,7 +115,7 @@ export default function Home() {
           <div className="hidden md:block md:pt-3 md:pb-3">
             <InputOutput rendered={true} inputText={"ls /home"}>
               <div className='flex flex-col'>
-                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "education") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("education") }}>education_and_extracurriculars</span></Link>
+                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "education") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("education") }}>education</span></Link>
                 <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "workxp") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("workxp") }}>work_experience</span></Link>
                 <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "projects") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("projects") }}>projects</span></   Link>
                 <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "artwork") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("artwork") }}>artwork</span></   Link>
