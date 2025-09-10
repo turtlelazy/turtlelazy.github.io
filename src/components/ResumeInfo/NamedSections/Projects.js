@@ -12,8 +12,16 @@ const Projects = () => {
     const SheetMusicScanner = ['Flask', 'OpenCV', 'MongoDB', 'HTML/CSS', 'JavaScript'];
     const BadApple = ['Computer Architecture', 'Logic Simulator', 'Compiler Design', 'ffmpeg'];
     const Choropleth = ['R', 'ACS API', 'shapefile', 'ggplot2', 'gganimate'];
+    const Creeper = ['Pytorch', 'YOLO', 'OpenCV', 'Blender', 'Machine Learning', 'Linear Algebra']
     return (
         <Section header="Projects">
+            
+            <SectionCard title="Chess Recording Entity Position Estimator (CReEPEr)" description="Capstone project. Two month project to develop a proof of concept algorithm for mapping chess setup from image to board annotations. Wrote data generation, testing scripts, model training for piece detection, and algorithms for board corner detection and segmentation and piece to square mappings."
+                date={"Summer 2025"} link={'https://github.com/turtlelazy/chess-datagen'} skills={Creeper}>
+                <div className='flex flex-wrap'>
+                    <Image src='https://raw.githubusercontent.com/turtlelazy/chess-datagen/master/combined_model/side_by_side.png' width={600} height={300} />
+                </div>
+            </SectionCard>
 
             <SectionCard title="ACS PUMA Choropleth" description="Personal project, generating animated choropleth maps of all 50 U.S. states. Wrote util R wrapper files for the ACS API and shapefile plots, to generate choropleth based on a chosen metric."
                 date={"September 2024"} link={'https://github.com/turtlelazy/acs-puma-choropleths'} skills={Choropleth}>
