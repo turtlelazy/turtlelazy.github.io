@@ -13,7 +13,7 @@ const Artwork = () => {
     const fire = ['Found Object', 'Photoshop', 'Photography'];
     return (
         <Section header="Artwork">
-
+            <Section header="ARTLA201">
             <SectionCard title="A Hot Cup of Coffee" description="A hot cup of coffee that looked very blue."
                 date={"June 2023"} link={'/hot_coffee.jpg'} skills={cupi}>
                     <div className='w-[100%]'>
@@ -41,7 +41,7 @@ const Artwork = () => {
                     <Image src='/fire.jpg' layout='responsive' style={{ width: '100%' }} height={0} width={0} />
                 </div>
             </SectionCard>
-
+            </Section>  
         </Section>    
     );
 }

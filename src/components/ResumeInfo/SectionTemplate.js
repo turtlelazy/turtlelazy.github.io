@@ -27,6 +27,7 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         gap: '16px',
+        paddingLeft: '16px',
     },
 };
 
