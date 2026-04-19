@@ -20,7 +20,7 @@ const Education = () => {
 
             <SectionCard 
                 title="Computer Science and Mathematics @Hunter College" 
-                description="Pursuing a double major Bachelor's degree in Computer Science and Mathematics. Took various upper level CS and math coursework." 
+                description="Pursuing a triple major Bachelor's degree in Computer Science,  Mathematics, and Studio Art. Took various upper level CS and math coursework." 
                 date={"GPA: 4.0 | Graduation Date: May 2026"} skills={HunterSkills} logoURL={"/hunter.jpeg"}>
             </SectionCard>
 
