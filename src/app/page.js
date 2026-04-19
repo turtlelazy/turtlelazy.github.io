@@ -27,7 +27,7 @@ export default function Home() {
   const artworkRef = useRef(null);
 
 
-  const [highlight, setHighlight] = useState("education");
+  const [highlight, setHighlight] = useState("projects");
 
   const [renderedEl, setRenderedEl] = useState({
     "aboutCard" : true,
@@ -107,7 +107,7 @@ export default function Home() {
           
           <InputOutput rendered={renderedEl["aboutCard"]} inputText={"cat about_me.txt"} typingSpeed={225}>
             <p style={{ fontSize: "14px" }}>
-              Hey, I&apos;m Ishraq Mahid! I&apos;m a senior at Hunter College currently double majoring in Computer Science and Mathematics. I first started coding in high school after joining my robotics team. Ever since then, I&apos;ve been exploring what I love by attending hackathons, working as a software and data engineer, and doing undergraduate research.
+              Hey, I&apos;m Ishraq Mahid! I&apos;m a senior at Hunter College currently triple majoring in Computer Science, Mathematics, and Studio Art. I first started coding in high school after joining my robotics team. Ever since then, I&apos;ve been exploring what I love by attending hackathons, working as a software and data engineer, and doing undergraduate research.
               <br></br><br></br>
               Now, I enjoy creating everything from robots and cool mobile apps, to machine-learning models, alongside exploring technical and complex mathematics. In my spare time, I enjoy art, working out, sewing, playing the piano, and baking.
             </p>
@@ -115,10 +115,13 @@ export default function Home() {
           <div className="hidden md:block md:pt-3 md:pb-3">
             <InputOutput rendered={true} inputText={"ls /home"}>
               <div className='flex flex-col'>
-                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "education") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("education") }}>education</span></Link>
-                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "workxp") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("workxp") }}>work_experience</span></Link>
                 <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "projects") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("projects") }}>projects</span></   Link>
+                
+                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "workxp") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("workxp") }}>work_experience</span></Link>
+
                 <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "artwork") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("artwork") }}>artwork</span></   Link>
+
+                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "education") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("education") }}>education</span></Link>
 
 
               </div>
