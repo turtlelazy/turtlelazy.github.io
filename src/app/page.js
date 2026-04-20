@@ -25,6 +25,7 @@ export default function Home() {
   const projectsRef = useRef(null);
   const education = useRef(null);
   const artworkRef = useRef(null);
+  const navRef = useRef(null);
 
 
   const [highlight, setHighlight] = useState("projects");
@@ -33,12 +34,15 @@ export default function Home() {
     "aboutCard" : true,
   });
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [width, setWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 0);
+  // default to a desktop width on the server to avoid hydration mismatch
+  const [width, setWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1024);
+  const [isClient, setIsClient] = useState(false);
 
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);
   }
   useEffect(() => {
+    setIsClient(true);
     window.addEventListener('resize', handleWindowSizeChange);
     return () => {
       window.removeEventListener('resize', handleWindowSizeChange);
@@ -46,6 +50,57 @@ export default function Home() {
   }, []);
 
   const isMobile = width <= 768;
+
+  function handleNavClick(name){
+    setHighlight(name);
+    // Poll until the section is visible (mounted and not display:none), then scroll smoothly
+    const tryScroll = (attempt = 0) => {
+      let el = null;
+      if (name === 'projects') el = projectsRef.current;
+      else if (name === 'workxp') el = workxpRef.current;
+      else if (name === 'education') el = education.current;
+      else if (name === 'artwork') el = artworkRef.current;
+
+      if (!el) {
+        if (attempt < 10) return setTimeout(() => tryScroll(attempt + 1), 50);
+        return;
+      }
+
+      // If element still hidden (display:none) offsetParent will be null or offsetHeight 0
+      if ((el.offsetParent === null || el.offsetHeight === 0) && attempt < 10) {
+        return setTimeout(() => tryScroll(attempt + 1), 50);
+      }
+
+      const navHeight = navRef.current?.offsetHeight || 0;
+      const rect = el.getBoundingClientRect();
+      const targetY = rect.top + window.scrollY - navHeight - 8;
+
+      // Custom smooth scroll for a gentler transition
+      const startY = window.scrollY;
+      const distance = targetY - startY;
+      const duration = 600; // ms
+      let startTime = null;
+
+      function easeInOutQuad(t){
+        return t<0.5 ? 2*t*t : -1 + (4-2*t)*t;
+      }
+
+      function step(timestamp){
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = easeInOutQuad(progress);
+        window.scrollTo(0, startY + (distance * eased));
+        if (elapsed < duration) {
+          requestAnimationFrame(step);
+        }
+      }
+
+      requestAnimationFrame(step);
+    };
+
+    requestAnimationFrame(() => tryScroll(0));
+  }
 
 
   // const handleScroll = () => {
@@ -93,10 +148,26 @@ export default function Home() {
   //   };
   // }, []);
   return (
-    <main style={{ cursor: 'url(cursor.png),auto', fontFamily:'monospace' }} className='p-0'>
+    <main style={{ cursor: 'url(cursor.png),auto', fontFamily:'monospace' }} className='p-0 pt-24 md:pt-0'>
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      {/* Mobile top bar to select section (fixed, full-width, responsive) */}
+      <div ref={navRef} className="md:hidden fixed top-0 left-0 right-0 w-full grid grid-cols-2 gap-2 px-2 py-2 bg-gray-900 text-white z-50">
+        <button onClick={() => handleNavClick("projects")} className={`w-full text-xs md:text-sm px-3 py-2 rounded text-center leading-tight ${highlight == "projects" ? "bg-green-400 text-black" : ""}`}>
+          projects
+        </button>
+        <button onClick={() => handleNavClick("workxp")} className={`w-full text-xs md:text-sm px-3 py-2 rounded text-center leading-tight ${highlight == "workxp" ? "bg-green-400 text-black" : ""}`}>
+          work_experience
+        </button>
+        <button onClick={() => handleNavClick("artwork")} className={`w-full text-xs md:text-sm px-3 py-2 rounded text-center leading-tight ${highlight == "artwork" ? "bg-green-400 text-black" : ""}`}>
+          artwork
+        </button>
+        <button onClick={() => handleNavClick("education")} className={`w-full text-xs md:text-sm px-3 py-2 rounded text-center leading-tight ${highlight == "education" ? "bg-green-400 text-black" : ""}`}>
+          education
+        </button>
+      </div>
 
       {/* <Banner /> */}
       <div className="flex flex-col md:flex-row p-4 relative" ref={aboutCard}>
@@ -115,13 +186,13 @@ export default function Home() {
           <div className="hidden md:block md:pt-3 md:pb-3">
             <InputOutput rendered={true} inputText={"ls /home"}>
               <div className='flex flex-col'>
-                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "projects") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("projects") }}>projects</span></   Link>
+                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "projects") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { handleNavClick("projects") }}>projects</span></   Link>
                 
-                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "workxp") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("workxp") }}>work_experience</span></Link>
+                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "workxp") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { handleNavClick("workxp") }}>work_experience</span></Link>
 
-                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "artwork") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("artwork") }}>artwork</span></   Link>
+                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "artwork") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { handleNavClick("artwork") }}>artwork</span></   Link>
 
-                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "education") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { setHighlight("education") }}>education</span></Link>
+                <Link> <span style={{ cursor: 'url(cursor-open.png),auto', color: "#6b42f6", fontSize: 25, fontFamily: 'monospace', ...(highlight == "education") ? { backgroundColor: '#00FF00' } : {} }} onClick={() => { handleNavClick("education") }}>education</span></Link>
 
 
               </div>
@@ -140,34 +211,53 @@ export default function Home() {
         {/** Right side of the wall */}
         <div className="w-full md:pl-[50%]">
 
-          <InputOutput rendered={renderedEl["aboutCard"]} inputText={`cat ${highlight}/info.txt`} typingSpeed={50}>
-            {(highlight == "education" || isMobile) &&
-              <div ref={education}>
+          {isClient && isMobile ? (
+            <InputOutput rendered={true} inputText={""} typingSpeed={50} skipInput={true}>
+              <div ref={education} className={highlight === "education" ? "" : "hidden"}>
                 <Education />
               </div>
-          }
-            
 
-            {(highlight == "workxp" || isMobile) &&
-            <div ref={workxpRef}  id="workxp">
-              <WorkXP />
-            </div>
-            }
+              <div ref={workxpRef} id="workxp" className={highlight === "workxp" ? "" : "hidden"}>
+                <WorkXP />
+              </div>
 
-            {(highlight == "projects" || isMobile) &&
-            <div ref={projectsRef}>
-              <Projects />
-            </div>
-          }
+              <div ref={projectsRef} className={highlight === "projects" ? "" : "hidden"}>
+                <Projects />
+              </div>
 
-            {(highlight == "artwork" || isMobile) &&
-              <div ref={artworkRef}>
+              <div ref={artworkRef} className={highlight === "artwork" ? "" : "hidden"}>
                 <Artwork />
               </div>
-            }
 
+            </InputOutput>
+          ) : (
+            <InputOutput rendered={renderedEl["aboutCard"]} inputText={`cat ${highlight}/info.txt`} typingSpeed={50}>
+              {highlight === "education" && (
+                <div ref={education}>
+                  <Education />
+                </div>
+              )}
 
-          </InputOutput>
+              {highlight === "workxp" && (
+                <div ref={workxpRef} id="workxp">
+                  <WorkXP />
+                </div>
+              )}
+
+              {highlight === "projects" && (
+                <div ref={projectsRef}>
+                  <Projects />
+                </div>
+              )}
+
+              {highlight === "artwork" && (
+                <div ref={artworkRef}>
+                  <Artwork />
+                </div>
+              )}
+
+            </InputOutput>
+          )}
           
 
         </div>
